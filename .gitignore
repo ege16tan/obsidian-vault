@@ -1,0 +1,11 @@
+# --- Obsidian: transiente UI-Zustände (nicht versionieren) ---
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache/
+
+# --- Plugin-Konfigurationen: können Secrets enthalten ---
+# (z. B. Local REST API: API-Key + RSA-Private-Key in data.json)
+.obsidian/plugins/*/data.json
+
+# --- Obsidian Papierkorb ---
+.trash/

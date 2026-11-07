@@ -1,0 +1,47 @@
+---
+tags:
+  - projekt/pc-steuerung
+  - thema/api
+  - typ/referenz
+aliases:
+  - API
+  - Endpunkte
+  - REST API
+status: aktiv
+stand: 2026-11-06
+---
+
+# API
+
+Basis: `http://<pc-ip>:8000`
+
+## Auth
+- LAN: HTTP Basic Auth (Benutzername/Passwort)
+- localhost: kein Login
+- Fallback: `X-Token` (alter Token)
+
+## Endpunkte
+| Methode | Pfad | Zweck |
+|---|---|---|
+| GET | `/status` | online, simulate, power_plan, pending_shutdown, setup_required |
+| POST | `/shutdown?delay=` | Herunterfahren (0–86400 s) |
+| POST | `/abort` | Abbrechen |
+| POST | `/hibernate` | Ruhezustand |
+| POST | `/power-plan?name=high\|balanced\|saver` | Energieplan |
+| POST | `/wake?mac=&port=` | Magic Packet |
+| GET | `/ping` | Verbindungstest |
+| GET | `/events` | letzte 50 Ereignisse |
+| GET | `/log?lines=` | Logdatei (Klartext) |
+| GET | `/setup-status` | Setup nötig? |
+| POST | `/setup` | Zugangsdaten (nur localhost) |
+| POST | `/mode?simulate=` | Simulation/Echtzeit |
+
+## /status Beispiel
+```json
+{"online":true,"host":"PC","simulate":true,"power_plan":"high","pending_shutdown":0,"setup_required":false}
+```
+
+## Fehler
+- 401: Login fehlt/falsch
+- 403: Zugriff verweigert
+- 422: ungültige Parameter
