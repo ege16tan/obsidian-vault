@@ -27,12 +27,7 @@ git push
 ```
 
 ## Push-Schutz
-- Pre-Push-Hook: `scripts/check-sensitive.sh`
-- GitHub Action: `.github/workflows/checks.yml`
-- Blockt Zugangsdaten, Secrets, Build-Artefakte, Dateien >10 MB
-- Aktivieren: `powershell -ExecutionPolicy Bypass -File scripts/install-hooks.ps1`
-- Umgehen (nicht empfohlen): `git push --no-verify`
-
+- PDenkst du, wir müssen was im Vault ändern? Und wir müssen noch bei, glaube ich, Git und Workflow sagen, dass bei jedem APK-Release ein GitHub-Release gepusht werden soll. Also nicht einfach so ein random Push, so da nichts bringt, sondern ein Release mit APK. Für jetzt nur APK Desktop bleibt mal so. Und dafür werden wir ja noch einen Installer machen. Können wir auch irgendwo so als, keine Ahnung, Roadmap schreiben oder so. Ja, mach dein Bestes.
 ## Android
 ```powershell
 cd "Android App"

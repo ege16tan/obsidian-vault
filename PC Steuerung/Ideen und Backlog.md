@@ -13,22 +13,25 @@ stand: 2026-11-06
 # Ideen und Backlog
 
 ## App
-- [ ] Eigenes App-Icon + finales Design
-- [ ] Texte nach strings.xml
-- [ ] Pull-to-refresh
-- [ ] App-Shortcuts
-- [ ] Widget-Status live (WorkManager)
-- [ ] Drei-Zustands-Status (gelb = Agent antwortet nicht)
-- [ ] Passwort verschlüsselt (EncryptedSharedPreferences)
-- [ ] Screenshots fürs README
+- [x] Eigenes App-Icon + finales Design
+- [ ] Texte nach strings.xml (Navigation/Status/Einstellungen erledigt, Timer-/Dialog-Texte offen)
+- [x] Pull-to-refresh
+- [x] App-Shortcuts
+- [ ] Widget-Status live (WorkManager) – **entfällt**, Widget wurde v0.9.5 entfernt
+- [x] Drei-Zustands-Status (gelb = Agent antwortet nicht) · „PC aus" jetzt rot
+- [x] Passwort verschlüsselt (AndroidKeystore AES/GCM)
+- [ ] Screenshots fürs README (Gerät: SM-A556B)
+- [ ] Markt+ ausbauen (Detailseiten, Update-Hinweis pro Modul)
+- [ ] Web-UI aus der App an/aus schalten (Agent-Endpunkt nötig)
 
 ## Agent
-- [ ] Automatisierte Tests (pytest/FastAPI TestClient)
+- [x] Automatisierte Tests (cargo test, 20 grün)
+- [ ] HTTP-Endpunkt-Tests für den Rust-Agenten
 - [ ] CI (GitHub Actions)
-- [ ] Zeitplan (täglich 23:00)
+- [ ] Routinen statt Zeitplan (siehe [[Routinen]])
 - [ ] Home-Assistant-/Tasker-Integration
-- [ ] Mehrere PCs (Profile)
-- [ ] Rust-Migration ([[Rust-Migration]])
+- [x] Mehrere PCs (Profile)
+- [x] Rust-Migration ([[Rust-Migration]])
 
 ## Ideen
 - [ ] Benachrichtigung bei Statuswechsel

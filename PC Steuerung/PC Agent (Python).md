@@ -7,11 +7,13 @@ aliases:
   - PC Agent
   - Python Agent
   - FastAPI Agent
-status: prototyp
-stand: 2026-11-06
+status: archiviert
+stand: 2026-11-10
 ---
 
 # PC Agent (Python)
+
+> **Archiviert am 10.11.2026.** Die Python-Version wird nicht mehr weiterentwickelt. Der Code liegt im Archiv-Repo https://github.com/ege16tan/pc-steuerung-python. Aktiv ist der Rust-Agent in `PC Agent Rust/`.
 
 > FastAPI-Dienst auf dem Windows-PC. Prototyp; Rust-Migration auf Branch `rust`.
 

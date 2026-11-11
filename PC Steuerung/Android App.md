@@ -8,7 +8,7 @@ aliases:
   - Android-App
   - App
 status: aktiv
-stand: 2026-11-07
+stand: 2026-11-10
 ---
 
 # Android App
@@ -40,6 +40,7 @@ stand: 2026-11-07
 
 ### Einstellungen
 - IP, Port, Benutzername, Passwort, MAC, Broadcast
+- **QR-Code scannen** direkt im Profil-Editor (übernimmt Name, IP, Port und optional die WoL-MAC)
 - Standard-Timer: Sofort / 10 s / 30 s / 60 s
 - Debug-Modus: Echtzeitmodus (mit Warnung)
 - Verbindung testen
@@ -56,15 +57,34 @@ gradlew.bat assembleDebug
 ```
 APK: `app/build/outputs/apk/debug/app-debug.apk`
 
+- **v0.8.0:** In-App-Update in den Einstellungen: neuestes stabiles GitHub Release prüfen, APK laden und wahlweise über Android-Systemdialog oder Shizuku installieren.
+
+- **v0.9.0 (08.11.2026):** APK mit versionCode 11 über GitHub Releases veröffentlicht; gleiche Signatur wie v0.8.0, damit bestehende Installationen aktualisiert werden können. Release: https://github.com/ege16tan/pc-steuerung/releases/tag/v0.9.0
+
+- **v0.9.1 (08.11.2026):** signierte APK mit versionCode 12 über GitHub Releases veröffentlicht; bestehende Signatur beibehalten. Release: https://github.com/ege16tan/pc-steuerung/releases/tag/v0.9.1
+
+- **v0.9.2 (08.11.2026):** neue Einstellungen mit Kartenübersicht und Detailseiten; signierte APK, versionCode 13. Release: https://github.com/ege16tan/pc-steuerung/releases/tag/v0.9.2
+
+- **v0.9.3 (09.11.2026):** Erststart-Assistent mit QR-Scan (Wizard: QR/manuell → WoL → Anmeldung → Fertig), versionCode 14. QR-Payload enthält nur Name, IP und Port.
+- **v0.9.4 (09.11.2026):** Scanner-Fix für Android 17: zxing 4.3 (Camera1) ersetzt durch CameraX + ML Kit (Camera2, offline). QR-Scan zusätzlich im Profil-Editor der Einstellungen. versionCode 15.
+
+- **v0.9.4 (10.11.2026):** optionaler WoL-Schritt im Assistenten (standardmäßig aus), MAC aus QR oder automatisch über `/pairing-info`; Scanner läuft mit CameraX + ML Kit. versionCode 15.
+
+- **v0.9.5 (11.11.2026):** Homescreen-Widget komplett entfernt (war nie gewollt). Setup-Schritt lässt sich über „Abbrechen und zurück" verlassen und verwirft ein leeres neues Profil. Statuspunkt bei „PC aus" ist rot. Banner zeigt jetzt **Simulation** (Echt ist Standard), Einstellungs-Schalter entsprechend umgedreht. Markt+ mit „Immer dabei"-Chips und Versions-Badges. Energieplan mit animierter Aktiv-Leiste, weicher Theme-Wechsel (Fade statt harter Umschaltung). UI-Texte für Navigation/Status/Einrichtung/Einstellungen nach `strings.xml`. versionCode 16. Release: https://github.com/ege16tan/pc-steuerung/releases/tag/v0.9.5
+
 ## Installieren (ADB)
 ```powershell
 adb install -r ".../app-debug.apk"
 ```
 
 ## Bekannte Punkte
-- Kein eigenes App-Icon (Standard-Icon)
-- Texte teilweise noch im Code statt in `strings.xml`
-- Widget-Status aktuell nur, solange die App läuft
+- Texte teilweise noch direkt im Code statt in `strings.xml`
+- Widget-Status wird aktuell nur aktualisiert, solange die App läuft
+
+- QR-Scanner: CameraX 1.4.2 + ML Kit 17.3.0. Die frühere zxing-CaptureActivity funktionierte auf dem Samsung SM-A556B mit Android 17 nicht (Camera1-API). ML Kit läuft offline, ohne Play-Services-Zwang.
+- Die App lief beim Test als **Dual-App (Benutzerprofil 96)**; das ist für den Scanner unproblematisch, solange die Kamera-Berechtigung im Profil erteilt ist.
+
+- Die Release-APK 0.9.4 mit den WoL-Änderungen ist gebaut, aber noch nicht auf dem Handy installiert (ADB-Verbindung brach ab). Scanner und WoL-Schritt müssen dort noch live geprüft werden.
 
 ## v0.7.0 – „Android besser" (in Arbeit)
 - ✅ **Status-Polling nur im Vordergrund**: `repeatOnLifecycle(STARTED)` um die 5-s-Schleife in `MainApp` – im Hintergrund pausiert sie, bei Rückkehr frischer Status sofort (Akku/Daten sparen)
@@ -72,3 +92,5 @@ adb install -r ".../app-debug.apk"
 - ✅ **Verschlüsselte Passwörter**: AndroidKeyStore AES-256/GCM in `Crypto.kt` (CryptoFormat + KeystoreCodec, kein security-crypto); Migration Klartext → verschlüsselt beim ersten Laden, alte Einzel-Keys wie bisher mit übernommen; 4 neue Format-Tests (insgesamt 32)
 - ✅ **v0.7.0 released** (07.11.2026, versionCode 8): https://github.com/ege16tan/pc-steuerung/releases/tag/v0.7.0 – Obtanium sollte das Update anbieten (gleiche Signatur, versionCode steigend)
 - 28 Unit-Tests müssen grün bleiben
+## Repo-Aufteilung
+Android vorerst im kanonischen `pc-steuerung`-Repo lassen. `AppUpdater.kt` fragt `ege16tan/pc-steuerung/releases/latest` ab; `Modules.kt` lädt den Katalog aus `ege16tan/pc-steuerung/main/module-catalog/modules.json`. Ein separates Android-Repo erfordert die Umstellung beider URLs und einen koordinierten Release-Umzug.
