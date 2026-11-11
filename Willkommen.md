@@ -68,6 +68,7 @@ stand: 2026-11-11
 - Simulationsmodus als Ausnahme (Banner), Echt ist Standard; Statuspunkt „PC aus" = rot
 - Setup lässt sich verlassen, Markt+ aufgewertet, Energieplan-Animation, weicher Theme-Wechsel
 - UI-Texte nach `strings.xml`, [[Credits]] angelegt
+- Vollständiges Protokoll: [[PC Steuerung/Umsetzung 2026-11-11|Umsetzung 2026-11-11]]
 
 **2026-11-10** – Rust-only: Python-Agent archiviert, Datenordner `%LOCALAPPDATA%\PC Steuerung`.
 
