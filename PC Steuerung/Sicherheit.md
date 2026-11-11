@@ -16,9 +16,14 @@ stand: 2026-11-06
 ## Modell
 - **Basic Auth** für LAN-Zugriffe (Benutzername/Passwort)
 - **localhost** (PC selbst) ohne Login → Tray + Web-UI
-- Passwort nur als **PBKDF2-Hash** in `PC App/credentials.json` (gitignored)
+- Passwort nur als **PBKDF2-Hash** in `%LOCALAPPDATA%\PC Steuerung\credentials.json` (gitignored)
 - Alter `PC_AGENT_TOKEN`/`X-Token` bleibt als Fallback
-- **Simulation** ist Standard; Echtmodus nur bewusst
+- **Simulation** ist bewusst die Ausnahme (Banner in der App); Echtbetrieb ist Standard
+
+## Android-Seite
+- Passwort liegt **verschlüsselt** in SharedPreferences (AndroidKeyStore, AES-256/GCM, `Crypto.kt`)
+- `usesCleartextTraffic` ist aktiv, weil der Agent nur HTTP im Heimnetz spricht – nur im eigenen WLAN okay
+- Keine Zugangsdaten im QR-Code (nur PC-Name, IP, Port, optional WoL-MAC)
 
 ## Vor Veröffentlichung
 - [ ] Zugangsdaten eingerichtet
@@ -30,6 +35,5 @@ stand: 2026-11-06
 - [ ] Checkliste in `SECURITY.md`
 
 ## Offene Punkte
-- Passwort liegt in der Android-App im Klartext in SharedPreferences
-- `usesCleartextTraffic` ist aktiv (HTTP im Heimnetz)
-- Beides für lokale Debug-Nutzung okay, vor Veröffentlichung prüfen
+- `usesCleartextTraffic` ist aktiv (HTTP im Heimnetz) – bewusst, aber vor Veröffentlichung prüfen
+- Automatische Anmeldung / deaktivierte Sperre (für Routinen) bleibt eine bewusste Windows-Entscheidung, siehe [[Routinen]]

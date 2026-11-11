@@ -35,8 +35,23 @@ gradlew.bat assembleDebug
 adb install -r app/build/outputs/apk/debug/app-debug.apk
 ```
 
+Release bauen (signiert, R8):
+```powershell
+cd "Android App"
+gradlew.bat assembleRelease
+# APK: app/build/outputs/apk/release/app-release.apk
+```
+
 ## Agent
 ```powershell
-cd "PC App"
-start.bat
+.\start-agent.bat          # Agent + Tray im Hintergrund
+.\start-agent-debug.bat    # Agent sichtbar + agent.log live
+```
+
+## Release veröffentlichen
+
+```powershell
+git tag v0.9.5
+git push origin main --tags
+gh release create v0.9.5 "Android App/app/build/outputs/apk/release/app-release.apk" --title "v0.9.5" --notes-file notes.md
 ```
