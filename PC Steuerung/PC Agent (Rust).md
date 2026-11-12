@@ -75,6 +75,18 @@ Get-Content "$env:LOCALAPPDATA\PC Steuerung\agent.log" -Tail 40 -Wait
 
 Im Debug-Start passiert genau das automatisch nach dem Start.
 
+## Desktop-Symbol
+
+Es gibt eine Verknüpfung **„PC Steuerung"** auf dem Desktop (seit 12.11.2026):
+
+- **Ziel:** `open-web-ui.ps1` – startet den Agenten (falls nötig), sorgt für das Tray und
+  öffnet `http://127.0.0.1:8000/` im Browser. Kein sichtbares Konsolenfenster.
+- **Icon:** `PC Steuerung.ico` – aus den Android-Vektoren gerendert
+  (Gradient `#0F766E` → `#1E293B`, weißer Power-Ring + Stiel), 7 Größen (16–256 px).
+- **Neu erzeugen:** `powershell -File scripts\create-desktop-shortcut.ps1`
+  (Icon bauen: `scripts\build-icon.ps1`).
+- Der Installer nutzt dasselbe Icon für Setup und Startmenü-Einträge.
+
 ## Verwandt
 
 - [[PC Steuerung/PC Steuerung|Projektübersicht]] · [[PC Steuerung/API|API]] · [[PC Steuerung/Sicherheit|Sicherheit]]
