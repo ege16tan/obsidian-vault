@@ -42,12 +42,24 @@ EXE sicher aus, prüft Port 8000 und startet jetzt **immer** das Tray mit
 | Geräte-Kopplung | `device.json` |
 | Logs | `agent.log` (+ `agent.log.1`), Manager: `agent-manager.log` |
 | Port | `PC_AGENT_PORT` (Standard 8000) |
-| Simulation | `PC_AGENT_SIMULATE` (`1` = nur loggen, Standard im Manager) |
+| Simulation | `PC_AGENT_SIMULATE` (`0` = echt, jetzt Standard im Manager; `1` = nur loggen) |
 | WoL-Broadcast | `PC_WOL_BROADCAST` (Standard `192.168.1.255`) |
 
 > [!note] Simulationsschalter
-> Der Manager setzt `PC_AGENT_SIMULATE=1`, wenn die Variable fehlt. Wie man das auf Echtbetrieb
-> umstellt, steht in [[Offene Fragen]] (Punkt 1).
+> Der Manager setzt `PC_AGENT_SIMULATE=0`, wenn die Variable fehlt – **echte Aktionen sind
+> Standard**. Simulation einschalten mit `PC_AGENT_SIMULATE=1` oder `POST /mode?simulate=true`.
+
+## Agent läuft immer
+
+Damit das Handy jederzeit verbinden kann, sind zwei Dinge eingerichtet (12.11.2026):
+
+1. **Autostart:** `PC Agent Rust\install-autostart.ps1 -WithTray` registriert
+   `PC Steuerung Agent` und `PC Steuerung Tray` in der Aufgabenplanung (bei Anmeldung).
+2. **Tray-Watchdog:** `tray.ps1` prüft alle 2,5 s; ist der Agent gestoppt, startet es ihn
+   automatisch (höchstens alle 20 s). Abschaltbar über das Tray-Menü
+   „Agent automatisch starten".
+
+Prüfen: `curl http://127.0.0.1:8000/status` → `{"online":true,...,"simulate":false}`.
 
 ## Endpunkte
 

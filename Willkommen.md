@@ -21,7 +21,7 @@ stand: 2026-11-11
 
 | Projekt | Stand | Version | Nächstes |
 |---|---|---|---|
-| [[PC Steuerung/PC Steuerung\|PC Steuerung]] | aktiv, Release v0.9.5 gebaut und installiert | App `0.9.5` (versionCode 16), Agent `0.1.0` | Live-Test Scanner/WoL, Routinen, Design-Politur |
+| [[PC Steuerung/PC Steuerung\|PC Steuerung]] | aktiv, Release v0.9.6 gebaut | App `0.9.6` (versionCode 17), Agent `0.1.0` | Live-Test Scanner/WoL, Routinen, Design-Politur |
 | [[Command Center/Command Center\|Command Center]] | pausiert, Lesen verifiziert | – | Lüfter-Schreibpfade nur nach Hardware-Verifikation |
 
 ## Einstieg nach Ziel

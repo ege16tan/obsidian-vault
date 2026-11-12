@@ -74,3 +74,21 @@ stand: 2026-11-11
 
 Der Pre-Push-Hook lief bei beiden Pushes sauber (`✅ Keine Probleme gefunden.`).
 Der Ordner `bilder/` (Fremd-Screenshots) wurde bewusst **nicht** committet.
+
+---
+
+# Nachtrag: v0.9.6 (12.11.2026)
+
+Feedback nach dem Review von v0.9.5 – alles umgesetzt:
+
+| Punkt aus dem Feedback | Umsetzung |
+|---|---|
+| „Schritt 0 raus" bei der Einrichtung | Auswahlseite (QR *oder* manuell) komplett entfernt; Assistent startet bei „Schritt 1 · Verbindung", QR-Scan ist ein Button **in** Schritt 1 und füllt Name/IP/Port/MAC automatisch. Die Felder bleiben für manuelle Eingabe sichtbar. |
+| „Der Fade ist scheiße – schau im Netz" | Alpha-Abblender ersetzt durch `animatedColorScheme()`: alle ~35 Farben des Schemas werden einzeln über 480 ms animiert. Ergebnis: echter Farb-Crossfade, kein Flackern, kein Zustandsverlust. Standardlösung ohne Zusatz-Bibliothek. |
+| „Markt+ ist immer noch kein Markt" | Markt+ sagt jetzt die Wahrheit: Karte „Kein Download nötig – diese Erweiterungen sind bereits in der App enthalten; der GitHub-Katalog legt nur fest, was angeboten wird." Alternativen (echtes Nachladen) stehen mit Vor-/Nachteilen in [[Offene Fragen]] Punkt 4. |
+| „PC ist an, aber App kann nicht verbinden, weil Agent nicht läuft" | Ursache war real: **kein** `pc-agent`-Prozess und **keine** Autostart-Aufgabe. Jetzt: Aufgaben `PC Steuerung Agent` + `PC Steuerung Tray` registriert, Agent gestartet (Port 8000, `/status` → `online:true`), plus **Tray-Watchdog**, der den Agenten automatisch startet, wenn er gestoppt ist (abschaltbar im Tray-Menü). |
+| „PC an = grün?" | Ja: `PcStatus.ONLINE → 0xFF4CAF50` (grün), `ERROR → gelb`, `OFFLINE → rot`, `UNKNOWN → grau`. |
+| „Jede Aktion echt, keine Simulation" | `agent-manager.ps1` setzt jetzt `PC_AGENT_SIMULATE=0` als Default → `/status` meldet `simulate:false`. Simulation nur noch bewusst per `PC_AGENT_SIMULATE=1` oder `/mode?simulate=true`. |
+
+**Geprüft:** `testDebugUnitTest` + `assembleRelease` grün; Agent live: `{"online":true,"host":"EVGA","simulate":false,...}`; Tray-Prozess läuft (PID 18572); Autostart-Aufgaben vorhanden.
+

@@ -23,9 +23,9 @@ stand: 2026-11-11
 | Modus-Anzeige | Banner zeigt **SIMULATION** (Ausnahme), Echt ist Standard | Simulation war früher der Sonderfall mit Warnton – jetzt umgekehrt |
 | Statuspunkt | grün = online · gelb = Agent antwortet nicht · **rot = PC aus** · grau = unbekannt | „PC aus" fällt sofort auf, vorher war es unauffälliges Grau |
 | Widget | **entfernt** | war nie gewollt, kostete Pflege und Testfläche |
-| Einrichtung | „Abbrechen und zurück" (`OutlinedButton`), verwirft ein leeres neues Profil | vorher war man im Assistenten gefangen |
-| Theme-Wechsel | kurzer Fade (Alpha 1 → 0,55 → 1) statt hartem Umschalten | „ploppt nicht mehr ins Gesicht", kein Zustandsverlust |
-| Markt+ | Basis-Chips („Immer dabei") + Erweiterungen mit Versions-Badge, Refresh als Icon | war vorher nur eine Liste + ein Knopf |
+| Einrichtung | **kein Schritt 0**: Einstieg direkt bei „Schritt 1 · Verbindung" incl. QR-Scan-Button; nach dem Scan werden Name/IP/Port/MAC automatisch gefüllt; „Abbrechen und zurück" verwirft ein leeres neues Profil | Auswahlseite war überflüssig, QR und manuell liefen auf denselben Ablauf hinaus |
+| Theme-Wechsel | **Crossfade über alle Farben** (`animatedColorScheme`, 480 ms) | der frühere Alpha-Abblender wirkte billig; jetzt blendet das echte Farbschema über |
+| Markt+ | **ehrlich statt Fake**: Hinweis, dass Module in der App enthalten sind und der GitHub-Katalog nur das Angebot steuert | vorher wirkte es wie ein Download-Markt, obwohl nichts geladen wurde |
 | Energieplan | animierte Aktiv-Leiste oben, aktiver Plan skaliert leicht | Auswahl ist ohne Lesen erkennbar |
 | Texte | zentrale `strings.xml` für Navigation, Status, Einrichtung, Einstellungen | Vorbereitung für Übersetzungen, saubere Diffs |
 

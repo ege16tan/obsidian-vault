@@ -70,7 +70,9 @@ APK: `app/build/outputs/apk/debug/app-debug.apk`
 
 - **v0.9.4 (10.11.2026):** optionaler WoL-Schritt im Assistenten (standardmäßig aus), MAC aus QR oder automatisch über `/pairing-info`; Scanner läuft mit CameraX + ML Kit. versionCode 15.
 
-- **v0.9.5 (11.11.2026):** Homescreen-Widget komplett entfernt (war nie gewollt). Setup-Schritt lässt sich über „Abbrechen und zurück" verlassen und verwirft ein leeres neues Profil. Statuspunkt bei „PC aus" ist rot. Banner zeigt jetzt **Simulation** (Echt ist Standard), Einstellungs-Schalter entsprechend umgedreht. Markt+ mit „Immer dabei"-Chips und Versions-Badges. Energieplan mit animierter Aktiv-Leiste, weicher Theme-Wechsel (Fade statt harter Umschaltung). UI-Texte für Navigation/Status/Einrichtung/Einstellungen nach `strings.xml`. versionCode 16. Release: https://github.com/ege16tan/pc-steuerung/releases/tag/v0.9.5
+- **v0.9.6 (12.11.2026):** Setup ohne Schritt 0 – „Einrichten" startet direkt bei „Schritt 1 · Verbindung" mit dem QR-Scan-Button (Felder werden nach dem Scan automatisch gefüllt) und ohne die überflüssige Auswahlseite. Theme-Wechsel ist jetzt ein echter Crossfade über alle Farbschema-Farben (`animatedColorScheme`, 480 ms) statt des Alpha-Abblenders. Markt+ ist ehrlich: Hinweis, dass die Module in der App enthalten sind und der GitHub-Katalog nur das Angebot steuert. versionCode 17.
+
+- **Agent 0.1.0 (12.11.2026):** Echtbetrieb ist Standard (`PC_AGENT_SIMULATE=0`), Autostart-Aufgaben registriert und Tray-Watchdog, der den Agenten automatisch startet.
 
 ## Installieren (ADB)
 ```powershell
