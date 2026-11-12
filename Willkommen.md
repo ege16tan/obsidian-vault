@@ -36,6 +36,7 @@ stand: 2026-11-11
 | Routinen planen (statt Zeitplan) | [[PC Steuerung/Routinen\|Routinen]] |
 | Design-/UI-Themen nachlesen | [[PC Steuerung/UI und Design\|UI und Design]] |
 | wissen, woher der Code/Ideengeber kommt | [[Credits]] |
+| sehen, welche Tools/MCP-Server verfügbar sind | [[Tools und MCP]] |
 | offene Entscheidungen sehen | [[Offene Fragen]] |
 | Sicherheitsregeln prüfen | [[PC Steuerung/Sicherheit\|Sicherheit]] · [[PC Steuerung/Test-Checkliste\|Test-Checkliste]] |
 
