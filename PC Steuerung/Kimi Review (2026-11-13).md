@@ -31,15 +31,15 @@ stand: 2026-11-13
 
 ## Faktencheck: was stimmt, was nicht
 
-| Kimi-Punkt | Stimmt? | Stand bei uns (geprüft 13.11.2026) |
-|---|---|---|
-| `start-agent.bat` ist nur ein Wrapper um PowerShell | **ja** | Datei ruft nur `agent-manager.ps1 -Action start` (hidden). Baut ggf. mit Cargo, startet Agent + Tray. |
-| Port 8000 ist konfliktanfällig | **ja** | 8000 steht an ~10 Stellen fest: `main.rs`-Default, `agent-manager.ps1 -Port`, `open-setup.ps1`, `build-installer.ps1`-Kommentar, README, `docs/planung.md`, AGENTS.md. `PC_AGENT_PORT` existiert, wird aber nicht überall durchgereicht. |
-| HTTP im LAN ist unsicher | **ja, aber bewusst** | Konzept ist „nur Heimnetz, kein Portforwarding, kein VPN“. Tailscale/WireGuard steht in [[Roadmap und Entscheidungen]] als **verschoben**. |
-| Web-UI ist ein großer HTML/JS-Block | **ja** | `src/page.html` allein ~27 KB (CSS + HTML + JS + inzwischen Game-Optimization-Tab), per `include_str!` im Binary. |
-| README sagt noch „FastAPI“ | **nein** | `Readme.md` nennt Rust. „FastAPI“ steht nur in **Code-Kommentaren** (`routes.rs`: „Validierung wie FastAPI“) als Paritäts-Hinweis zur alten Python-Version und in `CREDITS.md` (Archiv-Hinweis). Kein Doku-Fehler, nur Historie. |
-| Simulation-Default vs. Manager | **ja, Feinschliff** | `main.rs`: ohne `PC_AGENT_SIMULATE` = Simulation. `agent-manager.ps1`: setzt für den normalen Start Echtbetrieb. Ist in README + AGENTS.md erwähnt, aber leicht zu übersehen. |
-| Kein CSRF-Schutz auf localhost | **ja** | Localhost braucht keinen Login, `POST /shutdown`, `/hibernate`, `/mode` sind ohne Header erreichbar. |
+| Kimi-Punkt                                          | Stimmt?              | Stand bei uns (geprüft 13.11.2026)                                                                                                                                                                                                       |
+| --------------------------------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `start-agent.bat` ist nur ein Wrapper um PowerShell | **ja**               | Datei ruft nur `agent-manager.ps1 -Action start` (hidden). Baut ggf. mit Cargo, startet Agent + Tray.                                                                                                                                    |
+| Port 8000 ist konfliktanfällig                      | **ja**               | 8000 steht an ~10 Stellen fest: `main.rs`-Default, `agent-manager.ps1 -Port`, `open-setup.ps1`, `build-installer.ps1`-Kommentar, README, `docs/planung.md`, AGENTS.md. `PC_AGENT_PORT` existiert, wird aber nicht überall durchgereicht. |
+| HTTP im LAN ist unsicher                            | **ja, aber bewusst** | Konzept ist „nur Heimnetz, kein Portforwarding, kein VPN“. Tailscale/WireGuard steht in [[Roadmap und Entscheidungen]] als **verschoben**.                                                                                               |
+| Web-UI ist ein großer HTML/JS-Block                 | **ja**               | `src/page.html` allein ~27 KB (CSS + HTML + JS + inzwischen Game-Optimization-Tab), per `include_str!` im Binary.                                                                                                                        |
+| README sagt noch „FastAPI“                          | **nein**             | `Readme.md` nennt Rust. „FastAPI“ steht nur in **Code-Kommentaren** (`routes.rs`: „Validierung wie FastAPI“) als Paritäts-Hinweis zur alten Python-Version und in `CREDITS.md` (Archiv-Hinweis). Kein Doku-Fehler, nur Historie.         |
+| Simulation-Default vs. Manager                      | **ja, Feinschliff**  | `main.rs`: ohne `PC_AGENT_SIMULATE` = Simulation. `agent-manager.ps1`: setzt für den normalen Start Echtbetrieb. Ist in README + AGENTS.md erwähnt, aber leicht zu übersehen.                                                            |
+| Kein CSRF-Schutz auf localhost                      | **ja**               | Localhost braucht keinen Login, `POST /shutdown`, `/hibernate`, `/mode` sind ohne Header erreichbar.                                                                                                                                     |
 
 ## Kimis Punkte im Einzelnen
 

@@ -37,6 +37,7 @@ stand: 2026-11-11
 - [ ] Feinere Animationen: Statuswechsel-Übergang, Snackbar-Position, Pull-to-Refresh-Feder
 - [ ] Eigene App-Farben statt Dynamic Color (falls das Design „final" wird)
 - [ ] Screenshots für README aus dem echten Gerät (Gerät: SM-A556B, `RZCX30F396P`)
+- [ ] Web-UI nach [[Web-UI Konzept (Dashboard)]] umbauen (Vorlage: `docs/webui-konzept.html`)
 
 ## Regeln
 

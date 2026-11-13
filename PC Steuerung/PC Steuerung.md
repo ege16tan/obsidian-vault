@@ -35,6 +35,7 @@ stand: 2026-11-10
 - [[UI und Design]] – Design-Entscheidungen und UI-Backlog
 - [[Neue Ideen - gleiche App]] – All-in-One-Richtung: Kern bleibt, Spielmodus + Downloads kommen als Module
 - [[Kimi Review (2026-11-13)]] – externe Review: Port, Dienst statt Batch, CSRF, Web-UI-Neubau, `/api/v1`
+- [[Web-UI Konzept (Dashboard)]] – Dashboard-Vorlage: Abgleich, Luecken, offene Entscheidungen
 
 ## Schnellstart
 1. Agent starten: `start-agent.bat` (Agent + Tray im Hintergrund) – Debug-Konsole: `start-agent-debug.bat`
