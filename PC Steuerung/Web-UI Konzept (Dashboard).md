@@ -8,7 +8,7 @@ aliases:
   - Dashboard
   - Konzept HTML
   - Neues Web-UI
-status: offen
+status: aktiv
 stand: 2026-11-13
 ---
 
@@ -49,14 +49,14 @@ stand: 2026-11-13
 | CSRF | localhost-POSTs sind von fremden Seiten auslösbar (Kimi-Punkt 5) |
 | Barrierefreiheit | 11-px-Labels, Status nur über Farbe, keine `aria`-Attribute |
 
-## Entscheidungen vor dem Einbau
+## Entschieden (13.11.2026)
 
-- [ ] **Mehrere PCs?** (a) nur ein Gerät, (b) Liste im Browser + CORS, (c) Hub-Dienst
-- [ ] **Benutzer/Rollen jetzt oder später?** (Empfehlung: später, nach Geräte-Token)
-- [ ] **Polling 2 s behalten oder SSE?** (Empfehlung: Polling zuerst)
-- [ ] **Farbschema:** bewusst dunkel-only oder hell/dunkel/System wie die App?
-- [ ] **`page.html` splitten** (`ui.css` + `ui.js` + HTML) oder eine Datei lassen?
-- [ ] Vorlage 1:1 übernehmen oder Kacheln anpassen (z. B. Verlauf statt „Benutzer bald")?
+- [x] **Mehrere PCs?** → Phase 1 nur ein Gerät; die Sidebar wird zur Kopfzeile. Später: Geräteliste im Browser (localStorage) + CORS.
+- [x] **Benutzer/Rollen?** → jetzt nein, Kachel raus. `credentials.json` bleibt erweiterbar.
+- [x] **Polling oder SSE?** → Polling 2 s, pausiert bei verstecktem Tab (`visibilitychange`).
+- [x] **Farbschema?** → Phase 1 nur dunkel, Farben als CSS-Variablen; Labels ≥ 12 px, Status mit Text **und** Symbol.
+- [x] **`page.html` splitten?** → ja: `page.html` + `app.css` + `app.js`, je `include_str!`, eigene Routen ohne Login.
+- [x] **Vorlage 1:1?** → Optik/Raster 1:1, Inhalte getauscht (CPU/RAM „–", Benutzer + Geräteliste raus, Setup/Verlauf/Fehler/Game-Auswahl rein).
 
 ## Vorschlag Reihenfolge
 
@@ -65,6 +65,29 @@ stand: 2026-11-13
 2. **Phase 2 (Backend klein):** `GET /metrics` (CPU/RAM), `pending_seconds` in `/status`,
    Wake-Fallback-MAC, `X-PC-Steuerung`-Header
 3. **Phase 3 (optional):** SSE, mehrere PCs, Rollen
+
+## Umgesetzt (Phase 1, 13.11.2026)
+
+- **Dateien:** `PC Agent Rust/src/page.html` (Gerüst), `src/app.css`, `src/app.js`
+  → Routen `/`, `/app.css`, `/app.js` (ohne Login, `no-store`)
+- **Kopfzeile** statt Sidebar: PC-Name, Status-Pill (Text + Symbol), Modus-Pill (klickbar)
+- **Kacheln:** Status mit Herunterfahren/Ruhezustand/Abbrechen/Einschalten, CPU `–`,
+  RAM `–`, Timer (1 h/2 h/eigene Sekunden, Ring nur mit gemerkter Dauer), Energieplan,
+  Game Optimization (Auswahl, Automatisch, Stop, Scan, Plugin-Log), Ereignisse, Verlauf
+- **Ersteinrichtung:** Name → optional Wake-on-LAN mit Adaptersuche → Zugangsdaten → QR
+- **Fehlerzustand:** „Keine Verbindung" + Retry bei 401/Timeout
+- **CSRF:** `X-PC-Steuerung: 1` bei allen POSTs; der Agent prüft es für localhost
+  (Middleware `csrf_guard` → 403), `tray.ps1` sendet den Header ebenfalls
+- **Polling:** alle 2 s, pausiert bei verstecktem Tab
+
+**Verifiziert:** `cargo test` 36 grün; `/`, `/app.css` (text/css) und `/app.js`
+(application/javascript) liefern 200; POST ohne Header 403, mit Header 200;
+Setup-Ablauf (`/device-setup` → `/setup` → `setup_required: false`) durchgespielt;
+`node --check` auf `app.js`; alle im JS benutzten Element-IDs existieren im HTML.
+Ein Screenshot per Headless-Browser war in dieser Umgebung nicht möglich.
+
+**Offen (Phase 2):** `/metrics` (CPU/RAM), `pending_seconds`, Wake-Fallback-MAC,
+Hell/System-Theme, SSE, Geräteliste, Rollen.
 
 ## Verwandt
 
