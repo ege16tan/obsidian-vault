@@ -54,6 +54,7 @@ stand: 2026-11-10
 - Repo später archivieren (vorher Katalog-Umzug)
 - Finales Design polieren, Screenshots fürs README
 - Rust-Agent: HTTP-Endpunkt-Tests + CI
+- **All-in-One (ab 13.11.2026):** Spielmodus und Downloads als neue Module, Kern bleibt unverändert ([[Neue Ideen - gleiche App]])
 
 ## Entscheidungen
 - **Nur Heimnetz**, kein Internet/VPN/Port-Forwarding
@@ -71,3 +72,6 @@ stand: 2026-11-10
 - **Echt ist Standard, Simulation ist die Ausnahme** (11.11.2026): Die App warnt nur noch im Simulationsfall.
 - **Zeitplan → Routinen** (11.11.2026): Statt fester Uhrzeit gibt es Wenn-Dann-Routinen ([[Routinen]]).
 - **Credits sind Pflicht** (11.11.2026): Fremdcode, Bibliotheken und Agent-Skills werden in [[Credits]] und `CREDITS.md` geführt.
+- **Name und Icon bleiben** (13.11.2026): „PC Steuerung“ beschreibt weiterhin, was die App tut; Icon wird erst mit einem echten Redesign angefasst.
+- **All-in-One statt Spezialtool** (13.11.2026): Neue Funktionen (Spielmodus, Downloads) kommen als Module über Markt+ dazu, der Kern bleibt unangetastet ([[Neue Ideen - gleiche App]]).
+- **Privat, nicht öffentlich** (13.11.2026): Die App ist für den eigenen Alltag; Funktionsumfang wächst nach Bedarf, nicht nach Marktlogik.

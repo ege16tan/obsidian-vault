@@ -41,6 +41,19 @@ Pflege: `cline skill list -g`, Update mit `npx skills update -g`.
 | Android | Kotlin, Jetpack Compose (BOM 2025.09.00), CameraX, ML Kit Barcode, Shizuku, R8/AGP |
 | Windows | Inno Setup (Installer), PowerShell/WinForms (`NotifyIcon` fürs Tray) |
 
+## Vorbilder (Idee, kein übernommener Code)
+
+| Projekt | Lizenz | Was wir daraus gelernt haben |
+|---|---|---|
+| [Mem Reduct](https://github.com/henrypp/memreduct) von [Henry++](https://github.com/henrypp) | GPL-3.0 | Arbeitsspeicher unter Windows freigeben: Working Sets per `EmptyWorkingSet` trimmen, Standby-Liste per `NtSetSystemInformation(SystemMemoryListInformation, MemoryPurgeStandbyList)` leeren. |
+
+> [!warning] Kein Code kopiert
+> Mem Reduct steht unter **GPL-3.0**, unsere App unter MIT. Deshalb wurde **kein
+> Quellcode übernommen** – das Plugin `game-optimizer` ruft dieselben Windows-APIs
+> selbst auf. `memreduct.org` ist übrigens eine **Fan-Seite**, maßgeblich ist das
+> GitHub-Repo von Henry++.
+
+
 ## Werkzeuge
 
 - [Obsidian](https://obsidian.md) als Wissensbasis, Plugin *Local REST API with MCP* für Agent-Zugriff

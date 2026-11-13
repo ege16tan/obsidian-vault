@@ -23,6 +23,14 @@ stand: 2026-11-06
 - [ ] Screenshots fürs README (Gerät: SM-A556B)
 - [ ] Markt+ ausbauen (Detailseiten, Update-Hinweis pro Modul)
 - [ ] Web-UI aus der App an/aus schalten (Agent-Endpunkt nötig)
+- [x] **Game Optimization als Plugin** (13.11.2026): Plugin-Host, Spiele-Scan, Web-UI-Tab, RAM-Bereinigung nach Mem-Reduct-Vorbild ([[Neue Ideen - gleiche App]])
+- [ ] **Android-App anbinden**: Plugin aus der App starten/beenden
+- [ ] **Downloads im Blick**: read-only, laufend + zuletzt fertig
+- [ ] Kill-Liste je Spiel statt global
+- [ ] Entscheiden: eigener Tab „Werkzeuge" oder Module weiter unter „Steuerung"
+- [ ] **Downloads im Blick** als Modul (`downloads`): read-only, laufend + zuletzt fertig
+- [ ] Kill-Liste in den Einstellungen pflegen (Allowlist bekannter Prozessnamen)
+- [ ] Entscheiden: eigener Tab „Werkzeuge“ oder Module weiter unter „Steuerung“
 
 ## Agent
 - [x] Automatisierte Tests (cargo test, 20 grün)
@@ -32,6 +40,7 @@ stand: 2026-11-06
 - [ ] Home-Assistant-/Tasker-Integration
 - [x] Mehrere PCs (Profile)
 - [x] Rust-Migration ([[Rust-Migration]])
+- [ ] Kimi-Review abarbeiten: Port zentral, CSRF für localhost, `pc-agent.exe`-Subkommandos ([[Kimi Review (2026-11-13)]])
 
 ## Ideen
 - [ ] Benachrichtigung bei Statuswechsel

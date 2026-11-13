@@ -33,6 +33,8 @@ stand: 2026-11-10
 - [[Git und Workflow]] – Repo, Branches, ADB, Push-Schutz
 - [[Routinen]] – geplantes Wenn-Dann-Feature (ersetzt den Zeitplan)
 - [[UI und Design]] – Design-Entscheidungen und UI-Backlog
+- [[Neue Ideen - gleiche App]] – All-in-One-Richtung: Kern bleibt, Spielmodus + Downloads kommen als Module
+- [[Kimi Review (2026-11-13)]] – externe Review: Port, Dienst statt Batch, CSRF, Web-UI-Neubau, `/api/v1`
 
 ## Schnellstart
 1. Agent starten: `start-agent.bat` (Agent + Tray im Hintergrund) – Debug-Konsole: `start-agent-debug.bat`

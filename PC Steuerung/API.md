@@ -35,6 +35,15 @@ Basis: `http://<pc-ip>:8000`
 | GET | `/setup-status` | Setup nötig? |
 | POST | `/setup` | Zugangsdaten (nur localhost) |
 | POST | `/mode?simulate=` | Simulation/Echtzeit |
+| GET | `/plugins` | Plugins mit Status (`available`, `running`, `pid`, `uptime`, `tail`) |
+| POST | `/plugins/{id}/start?game=&auto=` | Plugin starten (nur auf Anforderung; `auto=1` = laufendes Spiel erkennen) |
+| POST | `/plugins/{id}/stop` | Plugin beenden (setzt den Energieplan zurück) |
+| GET | `/plugins/{id}/output?lines=` | Ausgabe des Plugins (Klartext) |
+| GET | `/games` | zuletzt gescannte Spiele, inkl. `running` |
+| POST | `/games/scan` | Spiele suchen (Steam, Epic, GOG, eigene Ordner) |
+| GET | `/game-config` | Kill-Liste, Suchordner, Automatik |
+| POST | `/game-config` | Profil speichern (JSON) |
+
 
 ## /status Beispiel
 ```json

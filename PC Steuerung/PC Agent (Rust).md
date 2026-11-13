@@ -63,9 +63,10 @@ Prüfen: `curl http://127.0.0.1:8000/status` → `{"online":true,...,"simulate":
 
 ## Endpunkte
 
-Siehe [[API]]. Kurz: `/status`, `/shutdown?delay=`, `/abort`, `/hibernate`, `/power-plan`,
 `/wake?mac=&port=`, `/events`, `/log?lines=`, `/ping`, `/setup-status`, `/pairing-info`,
 `/pairing-qr.svg`, `/setup`, `/mode?simulate=`, `/` (Web-UI).
+Neu (13.11.2026): `/plugins`, `/plugins/{id}/start|stop|output`, `/games`, `/games/scan`,
+`/game-config` – siehe [[Neue Ideen - gleiche App]].
 
 ## Log lesen
 
