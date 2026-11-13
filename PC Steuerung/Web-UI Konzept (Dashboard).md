@@ -36,9 +36,9 @@ stand: 2026-11-13
 
 | Element | Problem |
 |---|---|
-| PC einschalten (WoL) | `/wake` braucht `mac`, die MAC steckt in `device.json` (kommt über `/pairing-info`) |
-| Timer-Ring | `/status` liefert nur die **Restzeit**, nicht die Gesamtdauer → Ring stimmt nicht |
-| CPU-/RAM-Kacheln | Agent liefert **keine** Messwerte (im Konzept nur Attrappe) |
+| PC einschalten (WoL) | ✅ seit Phase 2: `/wake` ohne `mac` nutzt die MAC aus `device.json` |
+| Timer-Ring | ✅ seit Phase 2: `/status` liefert `pending_seconds` (Gesamtdauer) |
+| CPU-/RAM-Kacheln | ✅ seit Phase 2: `GET /metrics` (CPU-Stichproben, RAM, Laufzeit) |
 | Geräte-Sidebar | ein Agent = ein PC; mehrere Geräte brauchen CORS/Auth oder einen Hub |
 | Benutzer & Rollen | gibt es nicht (nur ein Basic-Auth-Paar) |
 | Game-Kachel | keine Spielauswahl, kein Status, kein Stop – nur zwei Buttons |
@@ -88,6 +88,27 @@ Ein Screenshot per Headless-Browser war in dieser Umgebung nicht möglich.
 
 **Offen (Phase 2):** `/metrics` (CPU/RAM), `pending_seconds`, Wake-Fallback-MAC,
 Hell/System-Theme, SSE, Geräteliste, Rollen.
+
+## Phase 2 (13.11.2026)
+
+- **`GET /metrics`** (`src/metrics.rs`): `cpu_percent`, `cpu_cores`, `ram_used_mb`,
+  `ram_total_mb`, `ram_percent`, `uptime_s`. CPU aus zwei `GetSystemTimes`-Stichproben –
+  die **erste** Antwort ist `null`, ab der zweiten (2 s später) steht ein Wert.
+  RAM über `GlobalMemoryStatusEx`, Laufzeit über `GetTickCount64`. Keine neue Crate.
+- **`/status` erweitert:** `pending_seconds` (Gesamtdauer), `device_name`, `wol_enabled`.
+  Der Timer-Ring stimmt damit auch nach einem Neuladen.
+- **`POST /wake` ohne `mac`:** nimmt die eingerichtete MAC aus `device.json`
+  (422, wenn Wake-on-LAN aus ist). Das UI sendet keinen MAC-Parameter mehr.
+- **Hell/System:** Palette als CSS-Variablen, Umschalter in der Kopfzeile
+  (System → Hell → Dunkel, gespeichert in `localStorage.pcTheme`); „System" folgt
+  `prefers-color-scheme` und reagiert live.
+- **CPU-/RAM-Kacheln:** echte Werte plus Sparkline der letzten 30 Messungen.
+
+**Verifiziert:** `cargo test` 41 grün; `/metrics` → erst `cpu_percent: null`, dann z. B.
+`8.8` bei 8 Kernen, 31 % RAM; `/status` enthält `pending_seconds`; `/wake` ohne MAC →
+422 ohne WoL, 200 mit MAC; `node --check` sauber; Agent auf Port 8000 neu gestartet.
+
+**Offen (Phase 3):** SSE, Geräteliste über mehrere Agenten (CORS), Rollen/Rechte.
 
 ## Verwandt
 
